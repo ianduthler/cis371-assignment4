@@ -16,11 +16,75 @@
           </label>
         </template>
       </li>
+      <li>
+        <template v-for="b in beverageStore.bases" :key="b.id">
+          <label>
+            <input
+              type="radio"
+              name="base"
+              :id="`r${b.id}`"
+              :value="b"
+              v-model="beverageStore.currentBase"
+            />
+            {{ b.name }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <template v-for="c in beverageStore.creamers" :key="c.id">
+          <label>
+            <input
+              type="radio"
+              name="creamer"
+              :id="`r${c.id}`"
+              :value="c"
+              v-model="beverageStore.currentCreamer"
+            />
+            {{ c.name }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <template v-for="s in beverageStore.syrups" :key="s.id">
+          <label>
+            <input
+              type="radio"
+              name="syrup"
+              :id="`r${s.id}`"
+              :value="s"
+              v-model="beverageStore.currentSyrup"
+            />
+            {{ s.name }}
+          </label>
+        </template>
+      </li>
     </ul>
-    <input type="text" placeholder="Beverage Name" />
-    <button>🍺 Make Beverage</button>
+    <label>
+      Name
+      <input
+        type="text"
+        placeholder="Beverage Name"
+        v-model="beverageStore.currentName"
+      />
+    </label>
+    <button @click="beverageStore.makeBeverage()">🍺 Make Beverage</button>
   </div>
-  <div id="beverage-container" style="margin-top: 20px"></div>
+  <div id="beverage-container" style="margin-top: 20px">
+    <!-- list of saved beverages -->
+    <template v-for="bev in beverageStore.beverages" :key="bev.id">
+      <label>
+        <input
+          type="radio"
+          name="savedBeverage"
+          :id="`r${bev.id}`"
+          :value="bev"
+          v-model="beverageStore.currentBeverage"
+          @change="beverageStore.showBeverage()"
+        />
+        {{ bev.name }}
+      </label>
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">

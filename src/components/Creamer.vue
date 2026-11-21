@@ -4,7 +4,10 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useBeverageStore } from "../stores/beverageStore";
+const beverageStore = useBeverageStore();
+</script>
 <style lang="scss" scoped>
 .froth {
   overflow: visible;
@@ -12,12 +15,12 @@
   position: relative;
   height: 20%;
   width: 100%;
-  background-color: #c6c6c6;
+  background-color: v-bind("beverageStore.currentCreamer.color");
   animation: pour-tea 2s 2s forwards;
 }
 .foam {
   display: block;
-  background: #e4e0d2;
+  background: v-bind("beverageStore.currentCreamer.color");
   border-radius: 30px;
   height: 40px;
   width: 40px;
